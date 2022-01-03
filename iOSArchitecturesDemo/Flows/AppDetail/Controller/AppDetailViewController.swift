@@ -14,6 +14,7 @@ final class AppDetailViewController: UIViewController {
 	private let imageDownloader = ImageDownloader()
 
 	lazy var headerViewController = AppDetailHeaderViewController(app: self.app)
+    lazy var whatsNewViewController = AppDetailWhatsNewViewController(app: self.app)
     
     private var appDetailView: AppDetailView {
         return self.view as! AppDetailView
@@ -47,7 +48,7 @@ final class AppDetailViewController: UIViewController {
 		self.navigationController?.navigationBar.tintColor = UIColor.white;
 		self.navigationItem.largeTitleDisplayMode = .never
 		self.addHeaderViewController()
-		self.addDescriptionViewController()
+		self.addWhatsNewViewController()
 	}
     
     private func configureNavigationController() {
@@ -59,7 +60,6 @@ final class AppDetailViewController: UIViewController {
 		self.addChild(self.headerViewController)
 		self.view.addSubview(self.headerViewController.view)
 		self.headerViewController.didMove(toParent: self)
-
 		self.headerViewController.view.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
 			self.headerViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -68,20 +68,16 @@ final class AppDetailViewController: UIViewController {
 		])
 	}
 
-	private func addDescriptionViewController() {
-		// TODO: ДЗ, сделать другие сабмодули
-		let descriptionViewController = UIViewController()
-
-		self.addChild(descriptionViewController)
-		self.view.addSubview(descriptionViewController.view)
-		descriptionViewController.didMove(toParent: self)
-
-		descriptionViewController.view.translatesAutoresizingMaskIntoConstraints = false
+	private func addWhatsNewViewController() {
+		self.addChild(whatsNewViewController)
+		self.view.addSubview(whatsNewViewController.view)
+        whatsNewViewController.didMove(toParent: self)
+        whatsNewViewController.view.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
-			descriptionViewController.view.topAnchor.constraint(equalTo: self.headerViewController.view.bottomAnchor),
-			descriptionViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-			descriptionViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-			descriptionViewController.view.heightAnchor.constraint(equalToConstant: 250.0)
+            whatsNewViewController.view.topAnchor.constraint(equalTo: self.headerViewController.view.bottomAnchor),
+            whatsNewViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            whatsNewViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            whatsNewViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
 		])
 	}
 
